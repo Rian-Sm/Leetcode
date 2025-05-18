@@ -17,3 +17,24 @@ public class Solution {
         return new int[] {};
     }
 }
+
+// two-pass hashtable solution
+
+public class Solution {
+    public int[] TwoSum(int[] nums, int target) {
+        int i;
+        int n = nums.Length;
+
+        Hashtable ht = new Hashtable();
+        
+        for (i = 0 ; i < n ; i++ ){
+            ht[nums[i]] = i;
+        }
+
+        for (i = 0 ; i < n ; i++ ){
+            if (ht.Contains(target-nums[i]) && i != (int) ht[target-nums[i]] )
+                return new int[] {i,(int) ht[target-nums[i]]};
+        }
+        return new int[] {};
+    }
+}

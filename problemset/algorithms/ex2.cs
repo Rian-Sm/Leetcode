@@ -38,3 +38,22 @@ public class Solution {
         return new int[] {};
     }
 }
+
+// one-pass hashtable solution
+
+public class Solution {
+    public int[] TwoSum(int[] nums, int target) {
+        int i;
+        int n = nums.Length;
+
+        Hashtable ht = new Hashtable();
+
+        for (i = 0 ; i < n ; i++ ){
+            if (ht.Contains(target-nums[i]))
+                return new int[] {i,(int) ht[target-nums[i]]};
+
+            ht[nums[i]] = i;
+        }
+        return new int[] {};
+    }
+}

@@ -1,44 +1,40 @@
-// 2. Add Two Numbers
-
 /**
  * Definition for singly-linked list.
- * public class ListNode {
- *     public int val;
- *     public ListNode next;
- *     public ListNode(int val=0, ListNode next=null) {
- *         this.val = val;
- *         this.next = next;
- *     }
- * }
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
  */
+struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
+    struct ListNode *initNode = (struct ListNode*) malloc(sizeof(struct ListNode));
+    struct ListNode *headNode = initNode;
+    headNode->val = 0;
+    headNode->next = NULL;
 
-public class Solution {
-    public ListNode AddTwoNumbers(ListNode l1, ListNode l2) {
-        int value = 0;
-        ListNode response = new ListNode();
-        ListNode edgeNode = response;
-        
-        while (l1 == null && l2 == null && value == 0)
-        {
-            int sum = value;
+    while (l1 || l2){
+        int sum = headNode->val;
 
-           if (l1 != null){
-                sum += l1.val;
-                l1 = l1.next;
-           }
-
-           if (l2 != null){
-                sum += l2.val;
-                l2 = l2.next;
-           }
-
-
-           value = sum / 10;
-           edgeNode.next = new ListNode(sum%10);
-           edgeNode.val = value;
-           edgeNode = edgeNode.next;
+        if(l1){
+            sum += l1->val;
+            l1 = l1->next;
         }
 
-        return response;
+        if(l2){
+            sum += l2->val;
+            l2 = l2->next;
+        }
+
+        headNode->val = sum % 10;
+
+        headNode->next = (struct ListNode*) malloc(sizeof(struct ListNode));
+        headNode->next->next = NULL;
+        headNode->next->val = sum/10;
+
+        if(!l1 && !l2 && headNode->next->val == 0){
+             headNode->next = NULL;
+        } else{
+            headNode = headNode->next;
+        }
     }
+    return initNode;
 }
